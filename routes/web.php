@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FormcontentsController@formlist');
+Route::post('/confirm', 'FormcontentsController@confirmation');
