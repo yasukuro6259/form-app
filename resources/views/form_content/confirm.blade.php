@@ -35,7 +35,7 @@
 </head>
 
 <body>
-  <?php var_dump($_POST); ?>
+  <?php //var_dump($_POST); ?>
   <!-- var_dump(変数)  キー名 => 型(バイト数) "値"-->
   <header class="title">お問い合わせフォーム</header>
   <form action="complete.php" class="form" method="POST">
