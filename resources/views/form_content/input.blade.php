@@ -64,10 +64,8 @@
 
       <div class="wrapper">
         <div class="box">お問い合わせ内容</div>
-        <textarea name="content"><?php if(isset($get_session_data['content'])):?>{{ $get_session_data['content'] }}
-        <?php endif ?>
-        <!-- textareaの内容は改行すると空白が入る -->
-      </textarea>
+        <textarea name="content"><?php if(isset($get_session_data['content'])):?>{{ $get_session_data['content'] }}<?php endif ?></textarea>
+      <!-- textaretaの内容は改行してインデント揃えようとすると空白が含まれてしまう。 -->
       </div>
     </div>
 
