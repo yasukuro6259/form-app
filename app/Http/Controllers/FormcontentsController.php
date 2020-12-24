@@ -17,21 +17,15 @@ class FormcontentsController extends Controller
      * 
      */
 
-    public function formList(){
-        return view('form_content.input'); // 「resources/views/form_content/input.php」を返す。
+    public function formList(Request $request){
+        $get_session_data = $request->session()->all();
+        return view('form_content.input', compact('get_session_data')); // 「resources/views/form_content/input.php」を返す。
     }
     public function confirmation(Request $request){
         $data = $request->all();
-        // $data = $request->session()->all();
-        //グローバルSessionヘルパ関数でSessionを利用。セッションの値を全て取得。どういう形でデータが渡されるの？ 
-        //$data = array[name1 => value1, name2 => value2, name3 => value3,....]
-        //$data[name1] = value1
-        return view('form_content.confirm', compact('data'));
+        $request->session()->put($_POST); //セッションへデータ保存
+        $get_session_data = $request->session()->all(); //保存したセッションデータの全て取得
+        return view('form_content.confirm', compact('data','get_session_data'));
     }
-    // public function modify(Request $request){
-    //     $data = $request->session()->put('title','usename', 'email', 'phoneNumber', 'content');
-    //     //データをセッションへ保存する。
-
-    // }
 }
 ?>
