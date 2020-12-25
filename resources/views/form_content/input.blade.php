@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
-  <link rel="stylesheet" href="css/style.css">
-
-  <title>formApp</title>
-</head>
+@include('require.head')
 
 <body>
   <?php //var_dump($get_session_data);?>
@@ -24,13 +15,14 @@
             $selected = $get_session_data['title'];
             }?>
           <option name="initial" value=""> 選択してください </option>
-          <option name="opinion" <?php if($selected == "ご意見"){
+          <option name="opinion" <?php if(isset($selected) && $selected == "ご意見"){
             echo "selected";
+            // issetの条件を付けないと$seleceteが定義されていないことになり、エラーが起きる。
             }?>>ご意見</option>
-          <option name="comment" <?php if($selected == "感想"){
+          <option name="comment" <?php if(isset($selected) && $selected == "感想"){
             echo "selected";
             }?>>感想</option>
-          <option name="other" <?php if($selected == "その他"){
+          <option name="other" <?php if(isset($selected) && $selected == "その他"){
             echo "selected";
             }?>>その他</option>
         </select>

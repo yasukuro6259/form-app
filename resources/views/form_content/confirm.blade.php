@@ -23,22 +23,14 @@
 <?php
 // require('require/header.html');
 ?>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
-  <link rel="stylesheet" href="css/style.css">
-
-  <title>formApp</title>
-</head>
+@include('require.head')
 
 <body>
   <?php //var_dump($_POST); ?>
   <!-- var_dump(変数)  キー名 => 型(バイト数) "値"-->
   <header class="title">お問い合わせフォーム</header>
-  <form action="complete.php" class="form" method="POST">
+  <form action="{{ url('/complete') }}" class="form" method="POST">
+  {{ csrf_field() }}
     <div class=form-contents-wrapper>
       <div class="wrapper">
         <div class="box">件名</div>
