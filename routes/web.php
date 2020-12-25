@@ -13,3 +13,4 @@
 
 Route::get('/', 'FormcontentsController@formlist');
 Route::post('/confirm', 'FormcontentsController@confirmation');
+Route::post('/complete', 'FormcontentsController@complete');

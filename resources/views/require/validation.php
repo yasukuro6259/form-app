@@ -4,19 +4,19 @@
     foreach ($keys as $key){
       if(empty($_POST[$key])){
         if($key == 'title'){
-          $error[] = "件名を選択してください。";
+          $error[] = "件名を選択してください。"; //"件名を選択してください。"を$error配列に追加
         }
         if($key == 'username'){
-          $error[] = "名前は必須項目です。";
+          $error[] = "名前は必須項目です。"; //"名前は必須項目です。"を$error配列に追加
         }
         if($key == 'email'){
-          $error[] = "メールアドレスは必須項目です。";
+          $error[] = "メールアドレスは必須項目です。"; //"名前は必須項目です。"を$error配列に追加
         }
         if($key == 'phoneNumber'){
-          $error[] = "電話番号は必須項目です。";
+          $error[] = "電話番号は必須項目です。"; //"名前は必須項目です。"を$error配列に追加
         }
         if($key == 'content'){
-          $error[] = "お問い合わせ内容は必須項目です。";
+          $error[] = "お問い合わせ内容は必須項目です。"; //"名前は必須項目です。"を$error配列に追加
         }
       }
     }
@@ -28,10 +28,10 @@
       $error[] = "正しい電話番号を記入してください。";
     }
     //長さに反する場合
-    if(strlen($_POST['username'] >= 60)){
+    if(strlen($_POST['username'] <= 60)){
       $error[] = "名前は60文字以内で記入してください。";
     }
-    if(strlen($_POST['email'] >= 60)){
+    if(strlen($_POST['email'] <= 60)){
       $error[] = "メールアドレスは254文字以内で記入してください。";
     }
     return $error;
