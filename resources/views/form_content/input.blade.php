@@ -17,7 +17,7 @@
           <option name="initial" value=""> 選択してください </option>
           <option name="opinion" <?php if(isset($selected) && $selected == "ご意見"){
             echo "selected";
-            // issetの条件を付けないと$seleceteが定義されていないことになり、エラーが起きる。
+            // issetの条件を付けないと$selectedが定義されていないことになり、エラーが起きる。
             }?>>ご意見</option>
           <option name="comment" <?php if(isset($selected) && $selected == "感想"){
             echo "selected";

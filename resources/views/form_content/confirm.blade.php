@@ -64,6 +64,7 @@
     </div>
     <button type="submit" class="button">送信する</button>
     <button type="button" onclick="location.href='/'" value="unset">修正する</button>
+    <!-- 「修正する」ボタンをクリックするとvalueとしてunsetが送信される -->
   </form>
 </body>
 </html>
