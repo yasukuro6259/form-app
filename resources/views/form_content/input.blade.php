@@ -4,6 +4,15 @@
   <?php //var_dump($get_session_data);?>
 
   <header class="title">お問い合わせフォーム</header>
+  @if ($errors->any())
+    <div class="error-messages">
+      <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+      </ul>
+    </div>
+  @endif
 
   <form action="{{ url('/confirm') }}" class="form" method="POST">
   {{ csrf_field() }} <!-- CSRF対策。bladeファイルでないと、文字列として扱われる -->
