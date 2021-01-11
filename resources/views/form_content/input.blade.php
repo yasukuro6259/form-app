@@ -56,7 +56,7 @@
       </div>
 
       <div class="wrapper">
-        <div class="box">電話番号</div>
+        <div class="box">電話番号(ハイフンなし)</div>
         <input name="phoneNumber" type=text <?php if (isset($get_session_data['phoneNumber'])):?>
           value="{{ $get_session_data['phoneNumber'] }}"
         <?php endif;?>

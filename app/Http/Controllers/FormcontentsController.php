@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Formcontent; //App\Models\Formcontent;ではないの？？
 
 class FormcontentsController extends Controller
 {
@@ -29,7 +30,7 @@ class FormcontentsController extends Controller
             'title'=>'required',
             'username'=>'required|unique:formcontents|max:60',
             'email'=>'required|unique:formcontents|regex:/^([a-zA-Z0-9])+([a-zA-Z0-9._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9._-]+)+$/|max:254',
-            'phoneNumber'=>'required|unique:formcontents|regex:/^[0-9]{2,4}[0-9]{2,4}[0-9]{3,4}$/|regex:/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/',
+            'phoneNumber'=>'required|unique:formcontents|regex:/^[0-9]{2,4}[0-9]{2,4}[0-9]{3,4}$/',
             'content'=>'required|unique:formcontents|'
         ],
         [
@@ -45,7 +46,17 @@ class FormcontentsController extends Controller
         return view('form_content.confirm', compact('data','get_session_data'));
     }
 
-    public function complete(){
+    public function complete(Request $request){
+        //インスタンス($formcontent)を作成
+        $formcontent = new Formcontent();
+        //$インスタンス名->inputタグのname属性値 = $request->inputタグのname属性値
+        $formcontent->title = $request->title;
+        $formcontent->username = $request->username;
+        $formcontent->email = $request->email;
+        $formcontent->phoneNumber = $request->phoneNumber;
+        $formcontent->content = $request->content;
+        //inputタグの属性（今回はname属性）はプロパティとなる？ $requestはRequestクラスのインスタンスで、paramsのようなもの？
+        $formcontent->save();
         return view('form_content.complete');
     }
 }
