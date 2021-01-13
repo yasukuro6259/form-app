@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 use App\Http\Controllers\Controller;
-use App\Models\Formcontent; //App\Models\Formcontent;ではないの？？
+use App\Models\Formcontent;
 
 class FormcontentsController extends Controller
 {
@@ -28,10 +30,10 @@ class FormcontentsController extends Controller
         $get_session_data = $request->session()->all(); //保存したセッションデータの全て取得
         $request->validate([
             'title'=>'required',
-            'username'=>'required|unique:formcontents|max:60',
-            'email'=>'required|unique:formcontents|regex:/^([a-zA-Z0-9])+([a-zA-Z0-9._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9._-]+)+$/|max:254',
-            'phoneNumber'=>'required|unique:formcontents|regex:/^[0-9]{2,4}[0-9]{2,4}[0-9]{3,4}$/',
-            'content'=>'required|unique:formcontents|'
+            'username'=>'required|max:60',
+            'email'=>'required|regex:/^([a-zA-Z0-9])+([a-zA-Z0-9._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9._-]+)+$/|max:254',
+            'phoneNumber'=>'required|regex:/^[0-9]{2,4}[0-9]{2,4}[0-9]{3,4}$/',
+            'content'=>'required|unique:formcontents|' //unipue:重複した値を格納できなくする。
         ],
         [
             'title.required' => '件名を選択してください',
@@ -57,6 +59,11 @@ class FormcontentsController extends Controller
         $formcontent->content = $request->content;
         //inputタグの属性（今回はname属性）はプロパティとなる？ $requestはRequestクラスのインスタンスで、paramsのようなもの？
         $formcontent->save();
+        Mail::send(['text'=>'form_content.mail'], ['formcontent'=>$formcontent], function($message){
+            $message->to($_POST['email'])
+                    ->subject('お問い合わせ内容の確認');
+                });
+        $request->session()->flush();
         return view('form_content.complete');
     }
 }
