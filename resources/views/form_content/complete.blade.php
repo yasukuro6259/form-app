@@ -8,7 +8,6 @@
 ?>
 
 @include('require.head')
-<?php var_dump($_POST)?>
 <body>
   <header class="title">お問い合わせフォーム</header>
   <div class="complete-message1">送信が完了しました。<br>お問い合わせ頂きありがとうございました。</div>
