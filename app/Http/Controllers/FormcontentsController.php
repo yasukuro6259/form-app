@@ -26,7 +26,7 @@ class FormcontentsController extends Controller
     }
     public function confirmation(Request $request){
         $data = $request->all();
-        $request->session()->put($_POST); //セッションへデータ保存
+        $request->session()->put($data); //セッションへデータ保存
         $get_session_data = $request->session()->all(); //保存したセッションデータの全て取得
         $request->validate([
             'title'=>'required',
@@ -59,8 +59,8 @@ class FormcontentsController extends Controller
         $formcontent->content = $request->content;
         //inputタグの属性（今回はname属性）はプロパティとなる？ $requestはRequestクラスのインスタンスで、paramsのようなもの？
         $formcontent->save();
-        Mail::send(['text'=>'form_content.mail'], ['formcontent'=>$formcontent], function($message){
-            $message->to($_POST['email'])
+        Mail::send(['text'=>'form_content.mail'], ['formcontent'=>$formcontent], function($message) use($formcontent){
+            $message->to($formcontent->email)
                     ->subject('お問い合わせ内容の確認');
                 });
         $request->session()->flush();
